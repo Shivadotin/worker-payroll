@@ -1,0 +1,51 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+env/
+venv/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# Environment variables & Secrets
+.env
+.env.*
+!.env.example
+
+# SQLite Database
+*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+
+# Logs
+*.log
+
+# Unit test & coverage reports
+.tox/
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+htmlcov/
+
+# Static & Media directories (if used)
+# media/
+# staticfiles/
+
+# IDEs & Text Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+.DS_Store
+

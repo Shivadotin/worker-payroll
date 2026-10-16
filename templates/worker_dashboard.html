@@ -1,0 +1,172 @@
+{% comment %} <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Worker Dashboard</title>
+</head>
+
+<body>
+
+    <h1>Worker Dashboard</h1>
+    <h2>Welcome {{ request.user.username }}</h2>
+    <hr>
+    <h2>My Attendance</h2>
+    <p>Total working days :<strong>{{ total_days }}</strong></p>
+    <p> Total Present:<strong>{{ present_days }}</strong></p>
+    <p>     Total Absent:<strong>{{ absent_days }}</strong></p>
+    <p> Daily  wage:<strong>{{ daily_wage }}</strong> </p>
+    <p>Total salary :<strong> ${{ total_salary }}</strong></p>
+    <table border="1">
+
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+
+        {% for record in attendance %}
+
+        <tr>
+            <td>
+                {{ record.date }}
+            </td>
+
+            <td>
+                {% if record.status == "PRESENT" %}
+                    &#9989; present
+                {% else %}
+                    &#10060; absent
+                {% endif %}
+            </td>
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="2">
+                No attendance records found.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <h2>My Earnings</h2>
+
+    <p><strong>This week attendance:</strong>₹{{ weekly_present }}</p>
+    <p><strong>This Week <earnings></earnings>:</strong>₹{{ weekly_earnings }}</p>
+    <p><strong>Total Days Worked:</strong>{{ present_days }}</p>
+    <p><strong>Total Lifetime Earnings:</strong>₹{{ total_salary }}</p>
+
+
+</body>
+
+</html> {% endcomment %}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'worker_dashboard.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Worker Dashboard</h1>
+    <h2>Welcome {{ request.user.username }}</h2>
+
+    <hr>
+
+    <h2>My Attendance</h2>
+
+    <div class="stats">
+        <div class="stat-card">
+            <p>Total Working Days</p>
+            <strong>{{ total_days }}</strong>
+        </div>
+
+        <div class="stat-card">
+            <p>Total Present</p>
+            <strong>{{ present_days }}</strong>
+        </div>
+
+        <div class="stat-card">
+            <p>Total Absent</p>
+            <strong>{{ absent_days }}</strong>
+        </div>
+
+        <div class="stat-card">
+            <p>Daily Wage</p>
+            <strong>₹{{ daily_wage }}</strong>
+        </div>
+
+        <div class="stat-card">
+            <p>Total Salary</p>
+            <strong>₹{{ total_salary }}</strong>
+        </div>
+    </div>
+
+    <h2>Attendance History</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for record in attendance %}
+            <tr>
+                <td>{{ record.date }}</td>
+                <td>
+                    {% if record.status == "PRESENT" %}
+                        Present
+                    {% else %}
+                         Absent
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No attendance records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>My Earnings</h2>
+
+    <div class="earnings">
+        <p>
+            <strong>This Week Attendance:</strong>
+            <span>{{ weekly_present }} days</span>
+        </p>
+
+        <p>
+            <strong>This Week Earnings:</strong>
+            <span>₹{{ weekly_earnings }}</span>
+        </p>
+
+        <p>
+            <strong>Total Days Worked:</strong>
+            <span>{{ present_days }}</span>
+        </p>
+
+        <p>
+            <strong>Total Lifetime Earnings:</strong>
+            <span>₹{{ total_salary }}</span>
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>
